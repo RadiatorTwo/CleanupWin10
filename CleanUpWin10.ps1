@@ -742,6 +742,11 @@ Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\shell\runas' -Name
 Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\shell\runas' -Name HasLUAShield -Value ''
 Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\shell\runas' -Name Icon -Value 'powershell.exe'
 
+# Disable Mouse Acceleration #
+reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /d "0" /f
+reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /d "0" /f
+reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /d "0" /f
+
 ##########
 # Restart
 ##########
