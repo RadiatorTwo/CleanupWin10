@@ -747,6 +747,9 @@ reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /d "0" /f
 reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /d "0" /f
 reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /d "0" /f
 
+# Fix GameBar PopUp when starting games #
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /d "0" /f /t REG_DWORD
+
 ##########
 # Restart
 ##########
