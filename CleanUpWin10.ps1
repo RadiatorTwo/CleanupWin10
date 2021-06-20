@@ -1,4 +1,4 @@
-####################
+﻿####################
 # Privacy Settings
 ####################
 
@@ -652,10 +652,10 @@ Remove-Item $layoutFile
 # Disable DMWAPPUSHSERVICE Telemtry Service #
 
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "DelayedAutoStart" /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "DelayedAutoStart" /t REG_DWORD /d "1"
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "DelayedAutoStart" /t REG_DWORD /d "1" /f
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "2"
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "disabledmwappushservice" /t REG_SZ /d "sc config dmwappushservice start= disabled"
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "disabledmwappushservice" /t REG_SZ /d "sc config dmwappushservice start= disabled" /f
 
 
 # Disable Privacy Settings Experience #
@@ -765,9 +765,9 @@ Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\r
 Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\runas' -Name HasLUAShield -Value ''
 Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\Background\shell\runas' -Name Icon -Value 'powershell.exe'
 
-reg add "HKEY_CLASSES_ROOT\Directory\shell\PowerShellHere" /f /d "Powershell hier öffnen"
+reg add "HKEY_CLASSES_ROOT\Directory\shell\PowerShellHere" /d "Powershell hier öffnen" /f
 reg add "HKEY_CLASSES_ROOT\Directory\shell\PowerShellHere" /v "Icon" /d "powershell.exe" /f
-reg add "HKEY_CLASSES_ROOT\Directory\shell\PowerShellHere\command" /f /d "powershell.exe -noexit -command Set-Location -literalPath '%V'"
+reg add "HKEY_CLASSES_ROOT\Directory\shell\PowerShellHere\command" /d "powershell.exe -noexit -command Set-Location -literalPath '%V'" /f
 
 New-Item -Path "Registry::HKEY_CLASSES_ROOT\Directory\shell" -Name runas\command -Force
 Set-ItemProperty -Path 'Registry::HKEY_CLASSES_ROOT\Directory\shell\runas\command' -Name '(default)' -Value $command -PassThru
@@ -781,7 +781,10 @@ reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /d "0" /f
 reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /d "0" /f
 
 # Fix GameBar PopUp when starting games #
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /d "0" /f /t REG_DWORD
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /d "0" /t REG_DWORD /f
+
+# Deactivate Taskbar Newsfeed
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f
 
 ##########
 # Restart
